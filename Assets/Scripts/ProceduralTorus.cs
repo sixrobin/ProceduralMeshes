@@ -47,6 +47,8 @@ namespace ProceduralMeshes
                 
                 for (int j = 0; j < _smallCircleResolution; ++j, t += 6)
                 {
+                    // TODO: Fix triangulation not working on circle resolution loop. Not visible, but still present.
+
                     triangles[t] = s + j;
                     triangles[t + 1] = (s + j + _smallCircleResolution) % vertices.Length;
                     triangles[t + 2] = (s + j + 1) % vertices.Length;
