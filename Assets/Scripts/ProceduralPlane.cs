@@ -2,7 +2,7 @@ namespace ProceduralMeshes
 {
     using UnityEngine;
 
-    public class ProceduralPlane : MonoBehaviour
+    public class ProceduralPlane : ProceduralMesh
     {
         [SerializeField]
         private Vector2 _size = Vector2.one;
@@ -10,10 +10,10 @@ namespace ProceduralMeshes
         private Vector2 _spacing = new Vector2(0.1f, 0.1f);
 
         [ContextMenu("Generate")]
-        private void Generate()
+        public override void Generate()
         {
-            UnityEngine.Mesh mesh = new() {name = "ProceduralPlane" };
-            this.GetComponent<MeshFilter>().mesh = mesh;
+            Mesh mesh = GetNewMesh();
+            _meshFilter.mesh = mesh;
 
             Vector2Int density = new(Mathf.CeilToInt(_size.x / _spacing.x), Mathf.CeilToInt(_size.y / _spacing.y));
             Vector2 spacing = new(_size.x / density.x, _size.y / density.y);
