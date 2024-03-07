@@ -8,6 +8,8 @@ namespace ProceduralMeshes
         private Vector2 _size = Vector2.one;
         [SerializeField, Min(0.01f)]
         private Vector2 _spacing = new Vector2(0.1f, 0.1f);
+        [SerializeField]
+        private bool _randomizeTrianglesDirection = false;
 
         [ContextMenu("Generate")]
         public override void Generate()
@@ -38,16 +40,28 @@ namespace ProceduralMeshes
                 }
             }
             
-            for (int ti = 0, vi = 0, y = 0; y < density.y; ++y, ++vi)
+            for (int i = 0, vi = 0, y = 0; y < density.y; ++y, ++vi)
             {
-                for (int x = 0; x < density.x; ++x, ti += 6, ++vi)
+                for (int x = 0; x < density.x; ++x, i += 6, ++vi)
                 {
-                    triangles[ti] = vi;
-                    triangles[ti + 1] = vi + density.x + 1;
-                    triangles[ti + 2] = vi + 1;
-                    triangles[ti + 3] = vi + 1;
-                    triangles[ti + 4] = vi + density.x + 1;
-                    triangles[ti + 5] = vi + density.x + 2;
+                    if (_randomizeTrianglesDirection && Random.value < 0.5f)
+                    {
+                        triangles[i] = vi;
+                        triangles[i + 1] = vi + density.x + 1;
+                        triangles[i + 2] = vi + 1;
+                        triangles[i + 3] = vi + 1;
+                        triangles[i + 4] = vi + density.x + 1;
+                        triangles[i + 5] = vi + density.x + 2;
+                    }
+                    else
+                    {
+                        triangles[i] = vi;
+                        triangles[i + 1] = vi + density.x + 1;
+                        triangles[i + 2] = vi + density.x + 2;
+                        triangles[i + 3] = vi + density.x + 2;
+                        triangles[i + 4] = vi + 1;
+                        triangles[i + 5] = vi;
+                    }
                 }
             }
             
