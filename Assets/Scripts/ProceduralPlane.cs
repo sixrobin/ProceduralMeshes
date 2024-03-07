@@ -66,9 +66,9 @@ namespace ProceduralMeshes
             }
             
             mesh.vertices = vertices;
+            mesh.triangles = triangles;
             mesh.uv = uv;
             mesh.tangents = tangents;
-            mesh.triangles = triangles;
             mesh.normals = normals;
         }
     }
