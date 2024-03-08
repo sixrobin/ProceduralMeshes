@@ -40,21 +40,26 @@ namespace ProceduralMeshes
                     uv[v] = new Vector2((i + _uvOffset.x) / (float)_largeCircleResolution % 1, (j + (_smallCircleResolution * 0.5f) + _uvOffset.y) / (float)_smallCircleResolution % 1);
                 }
             }
-
-            for (int i = 0, t = 0; i < _largeCircleResolution; ++i)
+            
+            for (int t = 0; t < _largeCircleResolution * _smallCircleResolution; ++t)
             {
-                int s = i * _smallCircleResolution;
-                
-                for (int j = 0; j < _smallCircleResolution; ++j, t += 6)
+                if ((t + 1) % _smallCircleResolution > 0)
                 {
-                    // TODO: Fix triangulation not working on circle resolution loop. Not visible, but still present.
-
-                    triangles[t] = s + j;
-                    triangles[t + 1] = (s + j + _smallCircleResolution) % vertices.Length;
-                    triangles[t + 2] = (s + j + 1) % vertices.Length;
-                    triangles[t + 3] = (s + j + 1) % vertices.Length;
-                    triangles[t + 4] = (s + j + _smallCircleResolution) % vertices.Length;
-                    triangles[t + 5] = (s + j + _smallCircleResolution + 1) % vertices.Length;
+                    triangles[t * 6] = t;
+                    triangles[t * 6 + 1] = (t + 1 + _smallCircleResolution) % vertices.Length;
+                    triangles[t * 6 + 2] = (t + 1) % vertices.Length;
+                    triangles[t * 6 + 3] = t;
+                    triangles[t * 6 + 4] = (t + _smallCircleResolution) % vertices.Length;
+                    triangles[t * 6 + 5] = (t + 1 + _smallCircleResolution) % vertices.Length;
+                }
+                else
+                {
+                    triangles[t * 6] = t;
+                    triangles[t * 6 + 1] = (t + 1) % vertices.Length;
+                    triangles[t * 6 + 2] = (t + 1 - _smallCircleResolution) % vertices.Length;
+                    triangles[t * 6 + 3] = t;
+                    triangles[t * 6 + 4] = (t + _smallCircleResolution) % vertices.Length;
+                    triangles[t * 6 + 5] = (t + 1) % vertices.Length;
                 }
             }
 
