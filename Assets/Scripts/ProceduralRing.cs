@@ -18,6 +18,8 @@ namespace ProceduralMeshes
             Mesh mesh = GetNewMesh();
             _meshFilter.mesh = mesh;
 
+            // TODO: UV.
+
             Vector3[] vertices = new Vector3[_circleResolution * _ringResolution];
             int[] triangles = new int[(_circleResolution * _ringResolution - 1) * 6];
 

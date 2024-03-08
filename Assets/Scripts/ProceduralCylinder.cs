@@ -20,6 +20,7 @@ namespace ProceduralMeshes
             _meshFilter.mesh = mesh;
             
             // TODO: Triangulate caps.
+            // TODO: UV.
             
             Vector3[] vertices = new Vector3[_circleResolution * _heightResolution];
             int[] triangles = new int[(_circleResolution * _heightResolution - 1) * 6];
