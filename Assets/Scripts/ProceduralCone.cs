@@ -48,8 +48,6 @@ namespace ProceduralMeshes
                 triangles[i * 6 + 5] = (i * 2 + 3) % (vertices.Length - 2);
             }
             
-            // TODO: Cap UV should not be radial.
-            
             mesh.vertices = vertices;
             mesh.triangles = triangles;
             mesh.uv = uv;
