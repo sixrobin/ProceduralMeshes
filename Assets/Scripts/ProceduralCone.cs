@@ -27,17 +27,17 @@ namespace ProceduralMeshes
             vertices[^2] = tipVertex;
             vertices[^1] = capVertex;
             uv[^2] = Vector2.up;
-            uv[^1] = Vector2.zero;
+            uv[^1] = Vector2.one * 0.5f;
 
             for (int i = 0; i < _resolution; ++i)
             {
                 float theta = (Mathf.PI * 2f * i) / _resolution;
-                Vector3 point = new Vector3(Mathf.Sin(theta), 0f, Mathf.Cos(theta)) * _radius;
+                Vector3 pointDirection = new Vector3(Mathf.Sin(theta), 0f, Mathf.Cos(theta));
                     
-                vertices[i * 2] = point;
-                vertices[i * 2 + 1] = point;
+                vertices[i * 2] = pointDirection * _radius;
+                vertices[i * 2 + 1] = pointDirection * _radius;
                 uv[i * 2] = new Vector2(i / (float)_resolution, 0f);
-                uv[i * 2 + 1] = new Vector2(i / (float)_resolution, 0f);
+                uv[i * 2 + 1] = new Vector2(Mathf.InverseLerp(-1f, 1f, pointDirection.x), Mathf.InverseLerp(-1f, 1f, pointDirection.z));
 
                 triangles[i * 6] = i * 2;
                 triangles[i * 6 + 1] = (i * 2 + 2) % (vertices.Length - 2);
