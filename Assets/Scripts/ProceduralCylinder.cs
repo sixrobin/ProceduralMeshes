@@ -36,20 +36,25 @@ namespace ProceduralMeshes
                 }
             }
             
-            for (int i = 0, t = 0; i < _heightResolution - 1; ++i)
+            for (int t = 0; t < _heightResolution * _circleResolution - _circleResolution; ++t)
             {
-                int s = i * _circleResolution;
-                
-                for (int j = 0; j < _circleResolution; ++j, t += 6)
+                if ((t + 1) % _circleResolution > 0)
                 {
-                    // TODO: Fix triangulation not working on circle resolution loop.
-                    
-                    triangles[t] = s + j;
-                    triangles[t + 1] = (s + j + 1) % vertices.Length;
-                    triangles[t + 2] = (s + j + _circleResolution) % vertices.Length;
-                    triangles[t + 3] = (s + j + 1) % vertices.Length;
-                    triangles[t + 4] = (s + j + _circleResolution + 1) % vertices.Length;
-                    triangles[t + 5] = (s + j + _circleResolution) % vertices.Length;
+                    triangles[t * 6] = t;
+                    triangles[t * 6 + 1] = t + 1;
+                    triangles[t * 6 + 2] = t + 1 + _circleResolution;
+                    triangles[t * 6 + 3] = t;
+                    triangles[t * 6 + 4] = t + 1 + _circleResolution;
+                    triangles[t * 6 + 5] = t + _circleResolution;
+                }
+                else
+                {
+                    triangles[t * 6] = t;
+                    triangles[t * 6 + 1] = t + 1 - _circleResolution;
+                    triangles[t * 6 + 2] = t + 1;
+                    triangles[t * 6 + 3] = t;
+                    triangles[t * 6 + 4] = t + 1;
+                    triangles[t * 6 + 5] = t + _circleResolution;
                 }
             }
 
