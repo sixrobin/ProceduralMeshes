@@ -27,7 +27,7 @@ namespace ProceduralMeshes
 
             for (int i = 0, v = 0; i < _heightResolution; ++i)
             {
-                Vector3 circleCenter = Vector3.up * (i / (float)(this._heightResolution - 1) * this._height);
+                Vector3 circleCenter = Vector3.up * (i / (float)(_heightResolution - 1) * _height);
 
                 for (int j = 0; j < _circleResolution; ++j, ++v)
                 {

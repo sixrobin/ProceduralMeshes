@@ -28,6 +28,11 @@ namespace ProceduralMeshes
             if (_generateEachFrame)
                 Generate();
         }
+
+        private void Reset()
+        {
+            _meshFilter = GetComponent<MeshFilter>();
+        }
         #endif
     }
 }
