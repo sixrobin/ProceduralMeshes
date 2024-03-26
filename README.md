@@ -3,7 +3,7 @@ Procedural mesh generation codes, that should be used in editor but not at runti
 
 The objective with this project is to have a meshes database, with dynamic parameters, making them more flexible than Unity's native meshes, and adding some shapes.
 
-Meshes included :
+Featured meshes:
 - Circle
 - Cone
 - Cube
